@@ -7,5 +7,5 @@
 {% endmacro %}
 
 {% macro nav() %}
-<nav class="nav">{% for link in config.extra.nav_links %}[<a href="{{ get_url(path=link.url) }}">{{ link.label }}</a>] {% endfor %}[<a class="rss" href="{{ get_url(path='rss.xml') }}">{{ config.extra.rss_label }}</a>]</nav>
+<nav class="nav">{% for link in config.extra.nav_links %}[<a href="{{ get_url(path=link.url, trailing_slash=true) }}">{{ link.label }}</a>] {% endfor %}[<a class="rss" href="{{ get_url(path='rss.xml') }}">{{ config.extra.rss_label }}</a>]</nav>
 {% endmacro %}
