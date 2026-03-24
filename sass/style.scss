@@ -371,3 +371,16 @@ code {
 .search-input:focus {
   border-color: var(--link);
 }
+
+.search-inline {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  outline: none;
+  width: auto;
+  min-width: 1ch;
+  caret-color: var(--text);
+}

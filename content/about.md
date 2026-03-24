@@ -1,6 +1,6 @@
 +++
 title = "about"
-template = "page.html"
+template = "about.html"
 +++
 
 I'm a developer who lives in the terminal. Most of my day happens inside `tmux` sessions, split between neovim, a shell, and whatever's compiling. I run Arch (btw) because I like knowing what's on my machine and why it's there.

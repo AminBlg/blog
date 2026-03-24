@@ -4,12 +4,16 @@
 {% block title %}search | {{ config.title }}{% endblock %}
 
 {% block content %}
-{{ m::prompt(cmd="grep -r ") }}
-<input class="search-input" type="text" id="search" placeholder="search term..." autofocus>
+{{ m::prompt(cmd="echo 'type a query and hit enter to search'") }}
+<div class="listing-meta">type a query and hit enter to search</div>
+
+<div class="prompt" style="margin-top: 0.75rem;"><span class="prompt-user">{{ config.extra.prompt_user }}</span><span class="prompt-sep">@</span><span class="prompt-host">{{ config.extra.prompt_host }}</span><span class="prompt-sep">:~$</span> grep -r "<input class="search-inline" type="text" id="search" placeholder="" autofocus>" posts/</div>
+
 <div id="search-results" class="listing" style="margin-top: 1rem;"></div>
 
 {{ m::nav() }}
 
+<script src="/elasticlunr.min.js"></script>
 <script>
 let index;
 async function loadIndex() {
@@ -30,10 +34,8 @@ function doSearch() {
         return `<div class="listing-entry"><a class="listing-link" href="${r.ref}">${item.title}</a></div>`;
     }).join('');
 }
-let timer;
-document.getElementById('search').addEventListener('input', () => {
-    clearTimeout(timer);
-    timer = setTimeout(doSearch, 200);
+document.getElementById('search').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') doSearch();
 });
 loadIndex();
 </script>
