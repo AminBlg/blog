@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "macros.html" as m %}
+
+{% block title %}404 | {{ config.title }}{% endblock %}
+
+{% block content %}
+{{ m::prompt(cmd="cat requested_path") }}
+
+<div class="listing-meta" style="margin-top: 1rem;">cat: No such file or directory</div>
+<div class="listing-meta" style="margin-top: 1.5rem;">You don't seem to exist in this layer of the Wired.</div>
+<div class="listing-meta" style="margin-top: 0.5rem;">No matter where you go, everybody's connected.</div>
+
+{{ m::nav() }}
+{% endblock %}

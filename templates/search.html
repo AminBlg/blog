@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "macros.html" as m %}
+
+{% block title %}search | {{ config.title }}{% endblock %}
+
+{% block content %}
+{{ m::prompt(cmd="grep -r ") }}
+<input class="search-input" type="text" id="search" placeholder="search term..." autofocus>
+<div id="search-results" class="listing" style="margin-top: 1rem;"></div>
+
+{{ m::nav() }}
+
+<script>
+let index;
+async function loadIndex() {
+    const res = await fetch('/search_index.en.json');
+    const data = await res.json();
+    index = elasticlunr.Index.load(data);
+}
+function doSearch() {
+    const query = document.getElementById('search').value;
+    const container = document.getElementById('search-results');
+    if (!query || !index) {
+        container.innerHTML = '';
+        return;
+    }
+    const results = index.search(query, { expand: true });
+    container.innerHTML = results.map(r => {
+        const item = index.documentStore.getDoc(r.ref);
+        return `<div class="listing-entry"><a class="listing-link" href="${r.ref}">${item.title}</a></div>`;
+    }).join('');
+}
+let timer;
+document.getElementById('search').addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(doSearch, 200);
+});
+loadIndex();
+</script>
+{% endblock %}

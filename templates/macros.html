@@ -1,0 +1,11 @@
+{% macro prompt(cmd) %}
+<div class="prompt"><span class="prompt-user">{{ config.extra.prompt_user }}</span><span class="prompt-sep">@</span><span class="prompt-host">{{ config.extra.prompt_host }}</span><span class="prompt-sep">:~$</span> {{ cmd }}</div>
+{% endmacro %}
+
+{% macro prompt_cursor() %}
+<div class="prompt"><span class="prompt-user">{{ config.extra.prompt_user }}</span><span class="prompt-sep">@</span><span class="prompt-host">{{ config.extra.prompt_host }}</span><span class="prompt-sep">:~$</span> <span class="cursor">█</span></div>
+{% endmacro %}
+
+{% macro nav() %}
+<nav class="nav">{% for link in config.extra.nav_links %}[<a href="{{ link.url }}">{{ link.label }}</a>] {% endfor %}[<a class="rss" href="/rss.xml">{{ config.extra.rss_label }}</a>]</nav>
+{% endmacro %}

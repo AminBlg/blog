@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "macros.html" as m %}
+
+{% block title %}tags | {{ config.title }}{% endblock %}
+
+{% block content %}
+{{ m::prompt(cmd="ls tags/") }}
+
+{% for term in terms %}
+<div class="listing-entry">
+    <span class="listing-meta">drwxr-xr-x  {{ term.pages | length }} posts</span>  <a class="listing-link" href="{{ term.permalink }}">{{ term.name }}</a>
+</div>
+{% endfor %}
+
+{{ m::nav() }}
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark light">
+    <!-- Layer 07: Protocol -->
+
+    <title>{% block title %}{{ config.title }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+    <meta name="keywords" content="terminal, systems, layers, connected">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/giallo-dark.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="/giallo-light.css" media="(prefers-color-scheme: light)">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
+</head>
+<body>
+    <div class="crt-noise" aria-hidden="true"></div>
+    <div class="crt-scanline" aria-hidden="true"></div>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+
+        <!-- "Present day, present time." -->
+        {% set sec = now() | date(format="%S") %}
+        <footer>
+            <div class="footer-quote">
+                {%- if sec is ending_with("0") or sec is ending_with("5") -%}
+                    No matter where you go, everybody's connected.
+                {%- elif sec is ending_with("1") or sec is ending_with("6") -%}
+                    Whatever happens, happens.
+                {%- elif sec is ending_with("2") or sec is ending_with("7") -%}
+                    I think, therefore you are.
+                {%- elif sec is ending_with("3") or sec is ending_with("8") -%}
+                    The net is vast and infinite.
+                {%- else -%}
+                    If you want to feel alive, you have to accept the pain.
+                {%- endif -%}
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

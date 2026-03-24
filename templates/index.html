@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "macros.html" as m %}
+
+{% block title %}{{ config.title }}{% endblock %}
+
+{% block content %}
+{{ m::prompt(cmd="ls -la posts/") }}
+
+{% set blog = get_section(path="blog/_index.md") %}
+{% for page in blog.pages %}
+<div class="listing-entry">
+    <span class="listing-meta">drwxr-xr-x  {{ config.extra.prompt_user }}  {{ page.date | date(format="%Y-%m-%d") }}</span>  <a class="listing-link" href="{{ page.permalink }}">{{ page.slug }}</a>
+</div>
+{% endfor %}
+
+<div class="listing-meta" style="margin-top: 0.75rem;">{{ blog.pages | length }} posts</div>
+
+{{ m::prompt_cursor() }}
+{{ m::nav() }}
+{% endblock %}
