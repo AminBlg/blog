@@ -13,11 +13,11 @@
 
 {{ m::nav() }}
 
-<script src="/elasticlunr.min.js"></script>
+<script src="{{ get_url(path='elasticlunr.min.js') }}"></script>
 <script>
 let index;
 async function loadIndex() {
-    const res = await fetch('/search_index.en.json');
+    const res = await fetch('{{ get_url(path="search_index.en.json") }}');
     const data = await res.json();
     index = elasticlunr.Index.load(data);
 }
